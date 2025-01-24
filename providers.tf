@@ -2,7 +2,6 @@ terraform {
   required_providers {
     ciscomcd = {
       source = "CiscoDevNet/ciscomcd"
-    #   version = "0.2.9"
     }
     aws = {
       source = "hashicorp/aws"
@@ -11,8 +10,7 @@ terraform {
 }
 
 provider "ciscomcd" {
-  # Configuration options
-  api_key_file = file("./kgreeshm-clemea-key.json")
+  api_key_file = file("./mcd-key.json")
 }
 
 
