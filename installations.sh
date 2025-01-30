@@ -1,4 +1,3 @@
-git clone https://github.com/CiscoDevNet/devwks-2222-src-code.git
 sudo apt update
 sudo apt install wget
 yes | sudo apt install curl
