@@ -1,5 +1,6 @@
 sudo apt update
 sudo apt install wget
+sudo apt install less
 yes | sudo apt install curl
 sudo apt install unzip
 wget https://releases.hashicorp.com/terraform/1.10.5/terraform_1.10.5_linux_amd64.zip
