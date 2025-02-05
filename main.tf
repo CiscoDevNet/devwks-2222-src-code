@@ -132,29 +132,29 @@ resource "ciscomcd_service_vpc" "svpc-aws" {
 	transit_gateway_id = data.aws_ec2_transit_gateway.tgw.id
 }
 
-data "aws_vpc" "spoke-vpc01" {
-  filter {
-    name = "tag:Name"
-    values = ["pod${var.pod_number}-app1-vpc"]
-  }
-}
+# data "aws_vpc" "spoke-vpc01" {
+#   filter {
+#     name = "tag:Name"
+#     values = ["pod${var.pod_number}-app1-vpc"]
+#   }
+# }
 
-data "aws_vpc" "spoke-vpc02" {
-  filter {
-    name = "tag:Name"
-    values = ["pod${var.pod_number}-app2-vpc"]
-  }
-}
+# data "aws_vpc" "spoke-vpc02" {
+#   filter {
+#     name = "tag:Name"
+#     values = ["pod${var.pod_number}-app2-vpc"]
+#   }
+# }
 
-resource "ciscomcd_spoke_vpc" "svpc-aws-spoke1" {
-	service_vpc_id = ciscomcd_service_vpc.svpc-aws.id
-	spoke_vpc_id = data.aws_vpc.spoke-vpc01.id
-}
+# resource "ciscomcd_spoke_vpc" "svpc-aws-spoke1" {
+# 	service_vpc_id = ciscomcd_service_vpc.svpc-aws.id
+# 	spoke_vpc_id = data.aws_vpc.spoke-vpc01.id
+# }
 
-resource "ciscomcd_spoke_vpc" "svpc-aws-spoke2" {
-	service_vpc_id = ciscomcd_service_vpc.svpc-aws.id
-	spoke_vpc_id = data.aws_vpc.spoke-vpc02.id
-}
+# resource "ciscomcd_spoke_vpc" "svpc-aws-spoke2" {
+# 	service_vpc_id = ciscomcd_service_vpc.svpc-aws.id
+# 	spoke_vpc_id = data.aws_vpc.spoke-vpc02.id
+# }
 
 resource "ciscomcd_gateway" "aws-egress-gw" {
 	name = "pod${var.pod_number}-egress-gw-aws"
