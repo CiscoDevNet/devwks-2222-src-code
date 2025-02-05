@@ -117,21 +117,8 @@ resource "ciscomcd_policy_rules" "ingress-policy-rules" {
     action      = "Allow Log"
     service     = ciscomcd_service_object.app1_svc_http.id
     source      = data.ciscomcd_address_object.any_addr_obj.id
-    # destination = 
     network_intrusion_profile = data.ciscomcd_profile_network_intrusion.ciscomcd-sample-ips-balanced-alert.id
     state                     = "ENABLED"
-  }
-}
-
-#Task 4
-
-resource "aws_ec2_transit_gateway" "tgw" {
-  description = "Transit Gateway"
-  auto_accept_shared_attachments = "enable"
-  default_route_table_association = "disable"
-  default_route_table_propagation = "disable"
-  tags = {
-    Name = "pod${var.pod_number}-tgw"
   }
 }
 
@@ -142,7 +129,7 @@ resource "ciscomcd_service_vpc" "svpc-aws" {
 	cidr = "192.168.${var.pod_number}.0/24"
 	availability_zones = ["us-east-1a"]
 	use_nat_gateway = false
-	transit_gateway_id = aws_ec2_transit_gateway.tgw.id
+	transit_gateway_id = data.aws_ec2_transit_gateway.tgw.id
 }
 
 data "aws_vpc" "spoke-vpc01" {
