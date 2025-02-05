@@ -10,6 +10,7 @@ data "aws_security_group" "datapath-sg" {
     name   = "group-name"
     values = ["pod${var.pod_number}-svpc-aws-datapath-sg"]
   }
+depends_on = [ ciscomcd_service_vpc.svpc-aws, ciscomcd_gateway.aws-egress-gw, ciscomcd_gateway.aws-egress-gw ]
 }
 
 resource "aws_security_group_rule" "datapath-rule" {
@@ -17,6 +18,6 @@ resource "aws_security_group_rule" "datapath-rule" {
   from_port         = 0
   to_port           = 65535
   protocol          = "-1"
-  cidr_blocks       = ["68.154.48.186/32"]
+  cidr_blocks       = ["68.154.48.186/32", "10.0.0.0/8","83.97.13.0/24"]
   security_group_id = data.aws_security_group.datapath-sg.id
 }
